@@ -9,14 +9,22 @@ func main() {
 	var a, b float64
 
 	fmt.Println("Введите число a > 0: ")
-	fmt.Scanf("%g\n", &a)
+	_, err := fmt.Scanf("%g\n", &a)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	fmt.Println("Введите число b > 0: ")
-	fmt.Scanf("%g\n", &b)
+	_, err = fmt.Scanf("%g\n", &b)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	c := calc_hypotenuse(a, b)
 
-	fmt.Printf("Гипотенуза равна: %.5g", c)
+	fmt.Println(c)
 
 }
 
