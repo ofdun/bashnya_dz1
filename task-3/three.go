@@ -5,24 +5,25 @@ import "fmt"
 func main() {
 	var n int
 
-	fmt.Println("Введите длину массива: ")
 	_, err := fmt.Scan(&n)
 	if err != nil {
-		fmt.Println(err)
-		return
+		panic(err)
 	}
 
 	arr := make([]int, n)
 
-	fmt.Printf("Введите %d чисел через пробел: ", n)
-	for i := 0; i < n-1; i++ {
-		_, err := fmt.Scan(&arr[i+1])
+	for i := 0; i < n; i++ {
+		_, err = fmt.Scan(&arr[i])
 		if err != nil {
-			fmt.Println(err)
-			return
+			panic(err)
 		}
 	}
-	fmt.Scan(&arr[0])
+
+	tmp := arr[n-1]
+	for i := n - 1; i > 0; i-- {
+		arr[i] = arr[i-1]
+	}
+	arr[0] = tmp
 
 	for _, c := range arr {
 		fmt.Printf("%d ", c)

@@ -5,11 +5,9 @@ import "fmt"
 func main() {
 	var n int
 
-	fmt.Println("Введите длину матрицы: ")
 	_, err := fmt.Scanf("%d\n", &n)
 	if err != nil {
-		println(err)
-		return
+		panic(err)
 	}
 
 	matrix := make([][]int, n)
@@ -18,25 +16,29 @@ func main() {
 		matrix[i] = make([]int, n)
 	}
 
-	fmt.Println("Введите элементы строки матрицы через пробел: ")
 	for i := 0; i < n; i++ {
 		for j := 0; j < n; j++ {
 			_, err = fmt.Scanf("%d", &matrix[i][j])
 			if err != nil {
-				fmt.Println(err)
-				return
+				panic(err)
 			}
 		}
 		fmt.Scanf("\n")
 	}
-	for i := 0; i < n-1; i++ {
-		for j := i + 1; j < n; j++ {
+	if isSymmetricMatrix(matrix) {
+		fmt.Println("yes")
+	} else {
+		fmt.Println("no")
+	}
+}
+
+func isSymmetricMatrix(matrix [][]int) bool {
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < len(matrix[i]); j++ {
 			if matrix[i][j] != matrix[j][i] {
-				fmt.Println("no")
-				return
+				return false
 			}
 		}
 	}
-
-	fmt.Println("yes")
+	return true
 }

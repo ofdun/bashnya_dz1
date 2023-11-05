@@ -3,23 +3,18 @@ package main
 import "fmt"
 
 func main() {
-	var num, length int
+	var num int
 	hashset := make(map[int]struct{})
 
-	fmt.Println("Введите список целых чисел (разделенных пробелами): ")
-
 	for {
-		n, err := fmt.Scanf("%d", &num)
+		_, err := fmt.Scanf("%d", &num)
 		if err != nil {
 			break
 		}
-		if n > 0 {
-			if _, exists := hashset[num]; !exists {
-				hashset[num] = struct{}{}
-				length += 1
-			}
+		if _, exists := hashset[num]; !exists {
+			hashset[num] = struct{}{}
 		}
 	}
 
-	fmt.Println(length)
+	fmt.Println(len(hashset))
 }
